@@ -11,6 +11,8 @@ seed()
 
 steps = 100 #will change this to a higher number while answering the question
 
+simulations = 1000 #number of simulations you will run
+
 #create a random walker
 
 walk_x = linspace(0,0,steps); walk_y = linspace(0,0,steps); #x and y locations of the random walker
