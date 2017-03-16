@@ -39,8 +39,9 @@ for sims in range(1,simulations):
 
         store_msd[i] = (store_msd[i]*(sims - 1) + msd)/sims #find average msd
 
+x_axis = range(3,steps)
 
-plt.plot(store_msd) #initial test to see that random walker works
+plt.plot(x_axis,store_msd[3:steps]) #random walker works!
 plt.xlabel('Simulation steps')
 plt.ylabel('Mean square displacenment (pixels^2)')
 
