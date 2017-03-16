@@ -67,7 +67,7 @@ plt.plot(x,c3, label= 't = ' + str(600/dt))
 plt.plot(x,c4, label= 't = ' + str(800/dt))
 plt.plot(x,c5, label= 't = ' + str(1000/dt))
 plt.legend()
-        
 
+savefig('diffusiongraph.pdf')
 
 
