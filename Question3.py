@@ -81,10 +81,10 @@ dx = 4 #space discretization
 size = L/dx #size of domain in pixels
 
 domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
-domain[size/2,size/2] = 1; #this going to be my seed
+domain[size/2,size/2] = 10; #this going to be my seed, choose some value larger than zero
 cluster_reach = 0 #cluster growth parameter, when this gets big, we terminate
 
-step = 0
+step = domain[size/2,size/2] #this will keep track of time and add pretty pretty colors
 
 #first, generate particle on a ring of radius 100 units
 
