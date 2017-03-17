@@ -112,7 +112,8 @@ while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
 
 
 plt.imshow(domain)
-
+plt.xlabel('Pixel = Length/dx')
+plt.ylabel('Pixel = Length/dx')
 savefig('Cluster1.pdf')
 
 np.save('Cluster1',domain)
