@@ -53,34 +53,38 @@ def do_the_cha_cha(size,posx,posy):
     
 #check adjacency to cluster
 
-def check_cluster(posx,posy,size,domain):
+def check_cluster(posx,posy,size,domain,step):
     
     bx = mod(posx- 1,size); fx = mod(posx + 1,size); #pixels behind or in front of x and y positions of particle
     by = mod(posy- 1,size) ; fy = mod(posy+ 1,size);
 
 
-    if domain[bx,posy] == 1 or domain[fx,posy] == 1 or domain[posx,by] == 1 or domain[posx,fy] == 1: #check if there is an adjacent cluster
+    if domain[bx,posy] > 0 or domain[fx,posy] > 0 or domain[posx,by] > 0 or domain[posx,fy] > 0: #check if there is an adjacent cluster
         
-        domain[posx,posy] = 1 #cluster is established
+        domain[posx,posy] = step #cluster is established
 
     return domain
     
 
+#----------------------------------
+#               MAIN
+#----------------------------------    
+    
 
 #3a
 
 
-
 #set up domain
+
 L = 200 #length units
 dx = 4 #space discretization
 size = L/dx #size of domain in pixels
 
-domain = zeros((size,size)) #0 is empty space and 1 is 'stuff'
+domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
 domain[size/2,size/2] = 1; #this going to be my seed
 cluster_reach = 0 #cluster growth parameter, when this gets big, we terminate
 
-
+step = 0
 
 #first, generate particle on a ring of radius 100 units
 
@@ -90,12 +94,12 @@ posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 1
 
 while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
     
-    
+    step = step + 1
     #check for cluster adjcency
     
-    domain = check_cluster(posx,posy,size,domain)
+    domain = check_cluster(posx,posy,size,domain,step)
     
-    if domain[posx,posy] == 1: #generate new particle if spot is taken
+    if domain[posx,posy] > 1: #generate new particle if spot is taken
     
         cluster_reach = np.linalg.norm([posx-size/2,posy-size/2]) #see how large cluster is
 
