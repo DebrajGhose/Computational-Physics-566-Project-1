@@ -3,18 +3,19 @@
 
 from pylab import *
 
+seed() #random seed
 
 #functions
 
 #generate new particle
 
-def generate_particle(size):
+def generate_particle(size,dx):
     
     posx = randint(0, size) - size/2; posy = randint(0, size) - size/2; #x and y positions of the particle
 
     mag = np.linalg.norm([posx,posy]) #magnitude from origin of domain
     
-    k = 100/mag #constant to make the points fall on a circle of radius 100
+    k = 100/dx/mag #constant to make the points fall on a circle of radius 100
     
     posx = k*posx + size/2; posy = k*posy + size/2; #now particle is on circle of radius 100 pixels
 
@@ -71,21 +72,23 @@ def check_cluster(posx,posy,size,domain):
 
 
 #set up domain
+L = 200 #length units
+dx = 4 #space discretization
+size = L/dx #size of domain in pixels
 
-size = 200 #size of domain
-cluster_reach = 0 #cluster growth parameter, when this gets big, we terminate
 domain = zeros((size,size)) #0 is empty space and 1 is 'stuff'
 domain[size/2,size/2] = 1; #this going to be my seed
-
+cluster_reach = 0 #cluster growth parameter, when this gets big, we terminate
 
 
 
 #first, generate particle on a ring of radius 100 units
 
 
-posx, posy = generate_particle(size) #generate particle on a ring of radius 100
+posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 100
 
 
+while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
     
     
     #check for cluster adjcency
@@ -96,17 +99,19 @@ posx, posy = generate_particle(size) #generate particle on a ring of radius 100
     
         cluster_reach = np.linalg.norm([posx-size/2,posy-size/2]) #see how large cluster is
 
-        posx, posy = generate_particle(size) #generate particle on a ring of radius 100
+        posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 100
 
     #do the random walk
     
     posx, posy = do_the_cha_cha(size,posx,posy) #NOTE: No need of particle decay since we enforced periodic boundary conditions
     
+
+
 plt.imshow(domain)
 
+savefig('Cluster1.pdf')
 
-
-
+np.save('Cluster1',domain)
 
 
 
