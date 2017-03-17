@@ -77,7 +77,7 @@ def check_cluster(posx,posy,size,domain,step):
 #set up domain
 
 L = 200 #length units
-dx = 4 #space discretization
+dx = 2 #space discretization
 size = L/dx #size of domain in pixels
 
 domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
