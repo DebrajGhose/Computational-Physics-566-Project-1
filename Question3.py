@@ -2,6 +2,8 @@
 
 
 from pylab import *
+from matplotlib import pyplot as plt
+import numpy as np
 
 seed() #random seed
 
@@ -68,6 +70,31 @@ def check_cluster(posx,posy,size,domain,step):
         domain[posx,posy] = step #cluster is established
 
     return domain
+
+
+#3b
+
+
+def frac_dim_plot(domain,size):
+	print "doing frac_dim"
+	#Extract the mass of the fractal as a function of radius 
+	
+	masslist = []
+	rs = list(np.linspace(1,1,size))
+	
+	for r in rs:
+		mass = 0
+		for m in range(1,size):
+			for n in range(1,size):
+				if domain[m,n] > 0 and ((m-size/2)**2 + (n-size/2)**2)**.5 < r:
+					mass = mass + 1
+		
+		masslist.append(mass)
+    
+	print masslist
+	print rs
+	plt.plot(rs,masslist)
+	plt.show()
     
 
 #----------------------------------
@@ -113,7 +140,7 @@ while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
     
     posx, posy = do_the_cha_cha(size,posx,posy) #NOTE: No need of particle decay since we enforced periodic boundary conditions
     
-print domain
+frac_dim_plot(domain,size)
 
 plt.imshow(domain)
 plt.xlabel('Pixel = Length/dx')
@@ -121,13 +148,6 @@ plt.ylabel('Pixel = Length/dx')
 savefig('Cluster1.pdf')
 
 np.save('Cluster1',domain)
-
-
-
-
-
-
-#3b
 
 
 
