@@ -34,7 +34,7 @@ conc[N/2-5:N/2+5] = 10 #concentration of chemical
 c0 = np.copy(conc[:]) # store initial condition to plot later
 #Diffuse stuff
 
-for t in range(1,1000): #t is time step
+for t in range(1,1001): #t is time step
     
     for i in range(1,N-1): #i is index on x
         
