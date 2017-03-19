@@ -18,6 +18,10 @@ def generate_particle(size,dx):
     k = 100/dx/mag #constant to make the points fall on a circle of radius 100
     
     posx = k*posx + size/2; posy = k*posy + size/2; #now particle is on circle of radius 100 pixels
+    
+    #enforce periodic boundary conditions; this is necessary for the rare instance when the partcle gets generated [50,100] or something similar
+    
+    posx = mod(int(posx),size); posy = mod(int(posy),size); #so if the particle goes over the edge, it will reneter from other side
 
     return int(posx), int(posy)
     
@@ -78,7 +82,7 @@ def check_cluster(posx,posy,size,domain,step):
 
 L = 200 #length units
 dx = 2 #space discretization
-size = L/dx #size of domain in pixels
+size = int(L/dx) #size of domain in pixels
 
 domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
 domain[size/2,size/2] = 10; #this going to be my seed, choose some value larger than zero
