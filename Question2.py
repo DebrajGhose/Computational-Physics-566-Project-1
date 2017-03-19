@@ -2,8 +2,15 @@
 
 
 from pylab import *
+from scipy.optimize import curve_fit
+import math
 
 #question b
+
+#define the gaussian expression 
+
+def gauss(x,sigma):
+    return 10*np.exp(-x*x/(2*sigma**2))/math.sqrt(2*math.pi*sigma**2)
 
 #simulation parameters
 
@@ -42,30 +49,45 @@ for t in range(1,1000): #t is time step
         
         c1 = np.copy(conc[:])
         
+        sigma = curve_fit(gauss,x,c1)  #use a fit to get the sigma(t) of the normal distribuation
+        print sigma[0][0]
+        
     elif t == 450:
         
         c2 = np.copy(conc[:])
+        
+        sigma = curve_fit(gauss,x,c2)
+        print sigma[0][0]
         
     elif t == 600:
         
         c3 = np.copy(conc[:])
         
+        sigma = curve_fit(gauss,x,c3)
+        print sigma[0][0]
+        
     elif t == 800:
         
         c4 = np.copy(conc[:])
         
+        sigma = curve_fit(gauss,x,c4)
+        print sigma[0][0]
+        
     elif t == 1000:
         
         c5 = np.copy(conc[:])
-
+        
+        sigma = curve_fit(gauss,x,c5)
+        print sigma[0][0]
+        
 plt.figure(1)
 
 plt.plot(x,c0,label= 't = 0' )
-plt.plot(x,c1,label= 't = ' + str(200/dt) )
-plt.plot(x,c2, label= 't = ' + str(450/dt))
-plt.plot(x,c3, label= 't = ' + str(600/dt))
-plt.plot(x,c4, label= 't = ' + str(800/dt))
-plt.plot(x,c5, label= 't = ' + str(1000/dt))
+plt.plot(x,c1,label= 't = ' + str(200*dt) )
+plt.plot(x,c2, label= 't = ' + str(450*dt))
+plt.plot(x,c3, label= 't = ' + str(600*dt))
+plt.plot(x,c4, label= 't = ' + str(800*dt))
+plt.plot(x,c5, label= 't = ' + str(1000*dt))
 plt.legend()
 plt.xlabel('Distance (pixels)')
 
