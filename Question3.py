@@ -113,7 +113,7 @@ while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
     
     posx, posy = do_the_cha_cha(size,posx,posy) #NOTE: No need of particle decay since we enforced periodic boundary conditions
     
-
+print domain
 
 plt.imshow(domain)
 plt.xlabel('Pixel = Length/dx')
