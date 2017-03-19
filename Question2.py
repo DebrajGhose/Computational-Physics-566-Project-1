@@ -50,35 +50,45 @@ for t in range(1,1001): #t is time step
         c1 = np.copy(conc[:])
         
         sigma = curve_fit(gauss,x,c1)  #use a fit to get the sigma(t) of the normal distribuation
-        print sigma[0][0]
+        
+        print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
+        print 'Fit sigma = ' + str(sigma[0][0])
         
     elif t == 450:
         
         c2 = np.copy(conc[:])
         
         sigma = curve_fit(gauss,x,c2)
-        print sigma[0][0]
+        
+        print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
+        print 'Fit sigma = ' + str(sigma[0][0])
         
     elif t == 600:
         
         c3 = np.copy(conc[:])
         
         sigma = curve_fit(gauss,x,c3)
-        print sigma[0][0]
+        
+        print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
+        print 'Fit sigma = ' + str(sigma[0][0])
         
     elif t == 800:
         
         c4 = np.copy(conc[:])
         
         sigma = curve_fit(gauss,x,c4)
-        print sigma[0][0]
+        
+        print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
+        print 'Fit sigma = ' + str(sigma[0][0])
         
     elif t == 1000:
         
         c5 = np.copy(conc[:])
         
         sigma = curve_fit(gauss,x,c5)
-        print sigma[0][0]
+        
+        print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
+        print 'Fit sigma = ' + str(sigma[0][0])
         
 plt.figure(1)
 
