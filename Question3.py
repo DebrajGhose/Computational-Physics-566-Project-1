@@ -80,7 +80,7 @@ def frac_dim_plot(domain,size):
 	#Extract the mass of the fractal as a function of radius 
 	
 	masslist = []
-	rs = list(np.linspace(1,1,size))
+	rs = list(np.linspace(1,size,size))
 	
 	for r in rs:
 		mass = 0
