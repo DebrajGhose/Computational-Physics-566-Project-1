@@ -80,7 +80,7 @@ def frac_dim_plot(domain,size):
 	#Extract the mass of the fractal as a function of radius 
 	
 	masslist = []
-	rs = list(np.linspace(1,size,size))
+	rs = list(np.linspace(1,size/2,size/2))
 	
 	for r in rs:
 		mass = 0
@@ -143,6 +143,7 @@ while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
 frac_dim_plot(domain,size)
 
 plt.imshow(domain)
+plt.colorbar()
 plt.xlabel('Pixel = Length/dx')
 plt.ylabel('Pixel = Length/dx')
 savefig('Cluster1.pdf')
