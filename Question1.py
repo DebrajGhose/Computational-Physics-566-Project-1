@@ -34,7 +34,7 @@ for sims in range(1,simulations):
         walk_x[i] = walk_x[i-1] + norm_dir_x
         walk_y[i] = walk_y[i-1] + norm_dir_y
 
-        msd = walk_x[i]**2 + walk_y[i]**2 #since my origin is [0,0], I don't need to subtract intial time step
+        msd = walk_x[i]**2 + walk_y[i]**2 #since the origin is [0,0], don't need to subtract intial time step
         
 
         store_msd[i] = (store_msd[i]*(sims - 1) + msd)/sims #find average msd
