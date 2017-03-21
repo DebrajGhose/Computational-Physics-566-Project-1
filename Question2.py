@@ -5,7 +5,6 @@ from pylab import *
 from scipy.optimize import curve_fit
 import math
 
-#question b
 
 #define the gaussian expression 
 
