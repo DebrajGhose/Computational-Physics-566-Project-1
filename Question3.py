@@ -69,10 +69,8 @@ def check_cluster(posx,posy,size,domain,step):
 
 #3b
 
-def frac_dim_plot(domain,size,sim):
-    print "doing frac_dim"
     
-def frac_dim_plot(domain,size):
+def frac_dim_plot(domain,size,sim):
     #Extract the mass of the fractal as a function of radius 
 	
     masslist = []
@@ -130,11 +128,11 @@ def log_fit(r,df): #fit to find dimeinsionality where dimensionality of a circle
 
 #set up domain
 
-L = 400 #length units
+L = 200 #length units
 dx = 2 #space discretization
 size = int(L/dx) #size of domain in pixels
 
-for sim in range(1,11):
+for sim in range(1,2):
     
     domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
     domain[size/2,size/2] = 800000; #this going to be my seed, choose some value larger than zero
