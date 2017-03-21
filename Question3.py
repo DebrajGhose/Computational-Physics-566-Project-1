@@ -71,11 +71,10 @@ def check_cluster(posx,posy,size,domain,step):
 
 
 def frac_dim_plot(domain,size):
-    print "doing frac_dim"
     #Extract the mass of the fractal as a function of radius 
 	
     masslist = []
-    controlmasslist = [] #positive controlt to make sure my fit gives me some value close to 2
+    controlmasslist = [] #positive control to to make sure my fit gives me some value close to 2
     rs = list(np.linspace(1,100/dx,100/dx))
 	
     for r in rs:

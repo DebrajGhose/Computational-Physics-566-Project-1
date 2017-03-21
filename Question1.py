@@ -9,7 +9,7 @@ seed()
 
 #simulation parameters
 
-steps = 100 #will change this to a higher number while answering the question
+steps = 100 #number of steps for the walkers
 
 simulations = 10000 #number of simulations you will run
 
@@ -26,7 +26,7 @@ for sims in range(1,simulations):
     
         dir_x = rand()-0.5; dir_y = rand()-0.5; #generate random x and y coordinates in [-0.5,0.5] to advance your walker
         
-        norm_dir_x = dir_x/(sqrt(dir_x**2 + dir_y**2)); norm_dir_y = dir_y/(sqrt(dir_x**2 + dir_y**2)); #nomralize movement vector
+        norm_dir_x = dir_x/(sqrt(dir_x**2 + dir_y**2)); norm_dir_y = dir_y/(sqrt(dir_x**2 + dir_y**2)); #normalize movement vector
         
         
         #Now, advance walker
