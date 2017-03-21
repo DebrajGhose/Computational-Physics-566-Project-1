@@ -104,7 +104,7 @@ def frac_dim_plot(domain,size):
     plt.xlabel('Radius (pixels)')
     plt.ylabel('Mass')
     plt.title(str(popt[0]))
-    clustername = 'Cluster' + str(sim) + 'dim.pdf'
+    clustername = 'LCluster' + str(sim) + 'dim.pdf'
     savefig(clustername)
     
     print 'Dimensionality of circle:'
@@ -130,7 +130,7 @@ def log_fit(r,df): #fit to find dimeinsionality where dimensionality of a circle
 
 #set up domain
 
-L = 200 #length units
+L = 400 #length units
 dx = 2 #space discretization
 size = int(L/dx) #size of domain in pixels
 
@@ -177,7 +177,7 @@ for sim in range(1,11):
     plt.colorbar()
     plt.xlabel('Pixel = Length/dx')
     plt.ylabel('Pixel = Length/dx')
-    clustername = 'Cluster' + str(sim) + '.pdf'
+    clustername = 'LCluster' + str(sim) + '.pdf'
     savefig(clustername)
 
 
