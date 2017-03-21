@@ -43,6 +43,6 @@ x_axis = range(3,steps)
 
 plt.plot(x_axis,store_msd[3:steps]) #random walker works!
 plt.xlabel('Simulation steps')
-plt.ylabel('Mean square displacenment (pixels^2)')
+plt.ylabel('Mean square displacement (pixels^2)')
 
 savefig('2Drandomwalk.pdf')
