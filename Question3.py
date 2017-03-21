@@ -90,16 +90,16 @@ def frac_dim_plot(domain,size):
 		
         masslist.append(mass)
     
-    print masslist
-    print rs
-    plt.plot(rs,masslist)
-    plt.xlabel('Radius (pixels)')
-    plt.ylabel('Mass')
-    plt.show()
-    
     #do a fit
     
     popt, pcov = curve_fit(log_fit,rs,masslist)
+    plt.figure(1)
+    plt.plot(rs,masslist)
+    plt.xlabel('Radius (pixels)')
+    plt.ylabel('Mass')
+    plt.title(str(popt[0]))
+    
+    savefig('Cluster2dimcurve.pdf')
     
     print 'Dimensionality'
     print popt
@@ -155,26 +155,14 @@ while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
     
 frac_dim_plot(domain,size)
 
+plt.figure(2)
 plt.imshow(domain)
 plt.colorbar()
 plt.xlabel('Pixel = Length/dx')
 plt.ylabel('Pixel = Length/dx')
 savefig('Cluster1.pdf')
 
-np.save('Cluster1',domain)
-
-
-
-
-
-
-
-
-
-
-
-
-
+np.save('Cluster2',domain)
 
 
 
