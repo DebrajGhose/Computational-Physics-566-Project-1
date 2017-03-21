@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+"""Program to solve the 1D diffusion equation"""
 
 from pylab import *
 from scipy.optimize import curve_fit
@@ -26,7 +26,7 @@ dx = x[1] - x[0] #space discretization
 
 k = D*dt/dx**2
 conc = np.zeros(N) #concentration at current time step
-conc1 = np.zeros(N) #conccentration at next time step
+conc1 = np.zeros(N) #concentration at next time step
 
 #setting up intial conditions
 
