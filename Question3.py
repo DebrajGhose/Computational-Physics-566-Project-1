@@ -12,13 +12,9 @@ seed() #random seed
 
 def generate_particle(size,dx):
     
-    posx = randint(0, size) - size/2; posy = randint(0, size) - size/2; #x and y positions of the particle
-
-    mag = np.linalg.norm([posx,posy]) #magnitude from origin of domain
+    theta = rand()*2*pi #generate an angle between 0 and 2pi
     
-    k = 100/dx/mag #constant to make the points fall on a circle of radius 100
-    
-    posx = k*posx + size/2; posy = k*posy + size/2; #now particle is on circle of radius 100 pixels
+    posx = 100/dx*cos(theta) + size/2; posy = 100/dx*sin(theta) + size/2; #generate cartesian coordinates around origin size/2,size/2
     
     #enforce periodic boundary conditions; this is necessary for the rare instance when the partcle gets generated [50,100] or something similar
     
@@ -30,7 +26,7 @@ def generate_particle(size,dx):
 
 def do_the_cha_cha(size,posx,posy):
     
-    step = randint(1,5) #choose one of four places for the patch to move to 
+    step = randint(1,5) #choose one of four directions for the patch to move to 
     
     if step == 1:
         
@@ -79,19 +75,28 @@ def frac_dim_plot(domain,size):
     #Extract the mass of the fractal as a function of radius 
 	
     masslist = []
-    rs = list(np.linspace(1,size/2,size/2))
+    controlmasslist = [] #positive controlt to make sure my fit gives me some value close to 2
+    rs = list(np.linspace(1,100/dx,100/dx))
 	
     for r in rs:
+        control_mass = 0
         mass = 0
         for m in range(1,size):
             for n in range(1,size):
+                
+                if ((m-size/2)**2 + (n-size/2)**2)**.5 < r:
+                    control_mass = control_mass + 1
+                 
+                
                 if domain[m,n] > 0 and ((m-size/2)**2 + (n-size/2)**2)**.5 < r:
                     mass = mass + 1
 		
         masslist.append(mass)
+        controlmasslist.append(control_mass)
     
     #do a fit
-    
+    popt1,pcov = curve_fit(log_fit,rs,controlmasslist)
+    print popt1
     popt, pcov = curve_fit(log_fit,rs,masslist)
     plt.figure(1)
     plt.plot(rs,masslist)
@@ -99,7 +104,7 @@ def frac_dim_plot(domain,size):
     plt.ylabel('Mass')
     plt.title(str(popt[0]))
     
-    savefig('Cluster2dimcurve.pdf')
+    savefig('Cluster6dimcurve.pdf')
     
     print 'Dimensionality'
     print popt
@@ -160,27 +165,8 @@ plt.imshow(domain)
 plt.colorbar()
 plt.xlabel('Pixel = Length/dx')
 plt.ylabel('Pixel = Length/dx')
-savefig('Cluster1.pdf')
+savefig('Cluster6.pdf')
 
-np.save('Cluster2',domain)
-
-
-
-##______________________________________________________________________________
-
-#Test that generating particle on ring is working
-
-"""
-for t in range(1,10): #replace with while loop later
-    
-    posx, posy = generate_particle(size)
-    
-    mag = np.linalg.norm([posx-size/2,posy - size/2]) #magnitude from origin of domain
-
-    print posx,posy,mag
-
-
-"""
 
 
 
