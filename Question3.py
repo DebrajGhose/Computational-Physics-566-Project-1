@@ -70,7 +70,7 @@ def check_cluster(posx,posy,size,domain,step):
 #3b
 
 
-def frac_dim_plot(domain,size):
+def frac_dim_plot(domain,size,sim):
     print "doing frac_dim"
     #Extract the mass of the fractal as a function of radius 
 	
@@ -95,19 +95,23 @@ def frac_dim_plot(domain,size):
         controlmasslist.append(control_mass)
     
     #do a fit
-    popt1,pcov = curve_fit(log_fit,rs,controlmasslist)
-    print popt1
+    popt1,pcov = curve_fit(log_fit,rs,controlmasslist) #this is just a positive control
+    
     popt, pcov = curve_fit(log_fit,rs,masslist)
-    plt.figure(1)
+    plt.figure(sim+10)
     plt.plot(rs,masslist)
     plt.xlabel('Radius (pixels)')
     plt.ylabel('Mass')
     plt.title(str(popt[0]))
+    clustername = 'Cluster' + str(sim) + 'dim.pdf'
+    savefig(clustername)
     
-    savefig('Cluster6dimcurve.pdf')
-    
-    print 'Dimensionality'
+    print 'Dimenstionality of circle:'
+    print popt1
+    print 'Dimensionality of cluster:'
     print popt
+    
+    return popt[0]
 
 
 def log_fit(r,df): #fit to find dimeinsionality where dimensionality of a circle is 2
@@ -129,46 +133,55 @@ L = 200 #length units
 dx = 2 #space discretization
 size = int(L/dx) #size of domain in pixels
 
-domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
-domain[size/2,size/2] = 10; #this going to be my seed, choose some value larger than zero
-cluster_reach = 0 #cluster growth parameter, when this gets big, we terminate
-
-step = domain[size/2,size/2] #this will keep track of time and add pretty pretty colors
-
-#first, generate particle on a ring of radius 100 units
-
-
-posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 100
-
-
-while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
+for sim in range(1,11):
     
-    step = step + 1
-    #check for cluster adjcency
+    domain = zeros((size,size)) #0 is empty space and anything higher is 'stuff'
+    domain[size/2,size/2] = 800000; #this going to be my seed, choose some value larger than zero
+    fractal_dimensions = []
+
+
+    cluster_reach = 0 #cluster growth parameter, when this gets big, we terminate
     
-    domain = check_cluster(posx,posy,size,domain,step)
+    step = domain[size/2,size/2] #this will keep track of time and add pretty pretty colors
     
-    if domain[posx,posy] > 1: #generate new particle if spot is taken
+    #first, generate particle on a ring of radius 100 units
     
-        cluster_reach = np.linalg.norm([posx-size/2,posy-size/2]) #see how large cluster is
-
-        posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 100
-
-    #do the random walk
     
-    posx, posy = do_the_cha_cha(size,posx,posy) #NOTE: No need of particle decay since we enforced periodic boundary conditions
+    posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 100
     
-frac_dim_plot(domain,size)
+    
+    while round(cluster_reach)<100/dx: #terminate when cluster reaches some size
+        
+        step = step + 1
+        #check for cluster adjcency
+        
+        domain = check_cluster(posx,posy,size,domain,step)
+        
+        if domain[posx,posy] > 1: #generate new particle if spot is taken
+        
+            cluster_reach = np.linalg.norm([posx-size/2,posy-size/2]) #see how large cluster is
+    
+            posx, posy = generate_particle(size,dx) #generate particle on a ring of radius 100
+    
+        #do the random walk
+        
+        posx, posy = do_the_cha_cha(size,posx,posy) #NOTE: No need of particle decay since we enforced periodic boundary conditions
+        
+    fracapp = frac_dim_plot(domain,size,sim)
+    
+    fractal_dimensions.append(fracapp) #store dimensional values
+    
+    plt.figure(sim)
+    plt.imshow(domain)
+    plt.colorbar()
+    plt.xlabel('Pixel = Length/dx')
+    plt.ylabel('Pixel = Length/dx')
+    clustername = 'Cluster' + str(sim) + '.pdf'
+    savefig(clustername)
 
-plt.figure(2)
-plt.imshow(domain)
-plt.colorbar()
-plt.xlabel('Pixel = Length/dx')
-plt.ylabel('Pixel = Length/dx')
-savefig('Cluster6.pdf')
 
-
-
+print 'Average df is:'
+print np.mean(fractal_dimensions)
 
 
 
