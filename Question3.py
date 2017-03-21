@@ -2,8 +2,7 @@
 
 
 from pylab import *
-from matplotlib import pyplot as plt
-import numpy as np
+from scipy.optimize import curve_fit
 
 seed() #random seed
 
@@ -76,25 +75,39 @@ def check_cluster(posx,posy,size,domain,step):
 
 
 def frac_dim_plot(domain,size):
-	print "doing frac_dim"
-	#Extract the mass of the fractal as a function of radius 
+    print "doing frac_dim"
+    #Extract the mass of the fractal as a function of radius 
 	
-	masslist = []
-	rs = list(np.linspace(1,size/2,size/2))
+    masslist = []
+    rs = list(np.linspace(1,size/2,size/2))
 	
-	for r in rs:
-		mass = 0
-		for m in range(1,size):
-			for n in range(1,size):
-				if domain[m,n] > 0 and ((m-size/2)**2 + (n-size/2)**2)**.5 < r:
-					mass = mass + 1
+    for r in rs:
+        mass = 0
+        for m in range(1,size):
+            for n in range(1,size):
+                if domain[m,n] > 0 and ((m-size/2)**2 + (n-size/2)**2)**.5 < r:
+                    mass = mass + 1
 		
-		masslist.append(mass)
+        masslist.append(mass)
     
-	print masslist
-	print rs
-	plt.plot(rs,masslist)
-	plt.show()
+    print masslist
+    print rs
+    plt.plot(rs,masslist)
+    plt.xlabel('Radius (pixels)')
+    plt.ylabel('Mass')
+    plt.show()
+    
+    #do a fit
+    
+    popt, pcov = curve_fit(log_fit,rs,masslist)
+    
+    print 'Dimensionality'
+    print popt
+
+
+def log_fit(r,df): #fit to find dimeinsionality where dimensionality of a circle is 2
+    
+    return pi*r**df
     
 
 #----------------------------------
