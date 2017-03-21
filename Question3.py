@@ -69,13 +69,14 @@ def check_cluster(posx,posy,size,domain,step):
 
 #3b
 
-
 def frac_dim_plot(domain,size,sim):
     print "doing frac_dim"
+    
+def frac_dim_plot(domain,size):
     #Extract the mass of the fractal as a function of radius 
 	
     masslist = []
-    controlmasslist = [] #positive controlt to make sure my fit gives me some value close to 2
+    controlmasslist = [] #positive control to make sure my fit gives me some value close to 2
     rs = list(np.linspace(1,100/dx,100/dx))
 	
     for r in rs:
@@ -106,7 +107,7 @@ def frac_dim_plot(domain,size,sim):
     clustername = 'Cluster' + str(sim) + 'dim.pdf'
     savefig(clustername)
     
-    print 'Dimenstionality of circle:'
+    print 'Dimensionality of circle:'
     print popt1
     print 'Dimensionality of cluster:'
     print popt
