@@ -102,7 +102,7 @@ def frac_dim_plot(domain,size,sim):
     plt.xlabel('Radius (pixels)')
     plt.ylabel('Mass')
     plt.title(str(popt[0]))
-    clustername = 'LCluster' + str(sim) + 'dim.pdf'
+    clustername = 'Cluster' + str(sim) + 'dim.pdf'
     savefig(clustername)
     
     print 'Dimensionality of circle:'
@@ -175,7 +175,7 @@ for sim in range(1,2):
     plt.colorbar()
     plt.xlabel('Pixel = Length/dx')
     plt.ylabel('Pixel = Length/dx')
-    clustername = 'LCluster' + str(sim) + '.pdf'
+    clustername = 'Cluster' + str(sim) + '.pdf'
     savefig(clustername)
 
 
