@@ -44,7 +44,7 @@ for t in range(1,1001): #t is time step
 
     #extract plots for 5 different times
     
-    if t == 200:
+    if t == 50:
         
         c1 = np.copy(conc[:])
         
@@ -53,7 +53,7 @@ for t in range(1,1001): #t is time step
         print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
         print 'Fit sigma = ' + str(abs(sigma[0][0]))
         
-    elif t == 450:
+    elif t == 100:
         
         c2 = np.copy(conc[:])
         
@@ -62,7 +62,7 @@ for t in range(1,1001): #t is time step
         print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
         print 'Fit sigma = ' + str(abs(sigma[0][0]))
         
-    elif t == 600:
+    elif t == 200:
         
         c3 = np.copy(conc[:])
         
@@ -71,7 +71,7 @@ for t in range(1,1001): #t is time step
         print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
         print 'Fit sigma = ' + str(abs(sigma[0][0]))
         
-    elif t == 800:
+    elif t == 400:
         
         c4 = np.copy(conc[:])
         
@@ -80,7 +80,7 @@ for t in range(1,1001): #t is time step
         print '(2Dt)^0.5 = ' + str(sqrt(2*D*t*dt))
         print 'Fit sigma = ' + str(abs(sigma[0][0]))
         
-    elif t == 1000:
+    elif t == 800:
         
         c5 = np.copy(conc[:])
         
@@ -91,12 +91,12 @@ for t in range(1,1001): #t is time step
         
 plt.figure(1)
 
-plt.plot(x,c0,label= 't = 0' )
-plt.plot(x,c1,label= 't = ' + str(200*dt) )
-plt.plot(x,c2, label= 't = ' + str(450*dt))
-plt.plot(x,c3, label= 't = ' + str(600*dt))
-plt.plot(x,c4, label= 't = ' + str(800*dt))
-plt.plot(x,c5, label= 't = ' + str(1000*dt))
+plt.plot(x,c0,label= 'time = 0' )
+plt.plot(x,c1,label= 'time = ' + str(50*dt) )
+plt.plot(x,c2, label= 'time = ' + str(100*dt))
+plt.plot(x,c3, label= 'time = ' + str(200*dt))
+plt.plot(x,c4, label= 'time = ' + str(400*dt))
+plt.plot(x,c5, label= 'time = ' + str(800*dt))
 plt.legend()
 plt.xlabel('Distance (pixels)')
 
