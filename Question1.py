@@ -45,6 +45,7 @@ store_md = linspace(0,0,steps) #array to store mean displacement
 
 store_msd = linspace(0,0,steps) #array to store mean square displacement MSDS
 
+store_abs_x = linspace(0,0,steps)
 #create a random walker
 
 walk_x = linspace(0,0,steps); walk_y = linspace(0,0,steps); #x and y locations of the random walker
@@ -75,12 +76,11 @@ x_axis = range(0,steps)
 plt.plot(x_axis,store_msd,label='Simulated MSD') #random walker works!
 plt.xlabel('Simulation steps')
 plt.ylabel('Mean square displacement (pixels^2)')
-
-
+plt.plot(x_axis,store_md,label='Mean displacement')
 
 #plotting an eyeball fit assuming slope = 1
 slope = 1
-plt.plot(x_axis,slope*x_axis,label='Eyeball Fit')
+plt.plot(x_axis,slope*x_axis,label='Eyeball Fit to MSD')
 
 plt.legend()
 
