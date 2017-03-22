@@ -70,35 +70,24 @@ for sims in range(1,simulations):
         
         store_md[i] = (store_md[i]*(sims - 1) + md)/sims #find average displacement
 
-x_axis = range(3,steps)
+x_axis = range(0,steps)
 
-plt.plot(x_axis,store_msd[3:steps]) #random walker works!
+plt.plot(x_axis,store_msd,label='Simulated MSD') #random walker works!
 plt.xlabel('Simulation steps')
 plt.ylabel('Mean square displacement (pixels^2)')
 
-savefig('2Drandomwalkmsd.pdf')
-
-plt.plot(x_axis,store_msd[3:steps]) #random walker works!
-plt.xlabel('Simulation steps')
-plt.ylabel('Mean displacement (pixels)')
-
-savefig('2Drandomwalkmsd.pdf')
 
 
-#Calculating and plotting a line of best fit to the data
+#plotting an eyeball fit assuming slope = 1
+slope = 1
+plt.plot(x_axis,slope*x_axis,label='Eyeball Fit')
 
-linebestfit = np.poly1d(np.polyfit(x_axis, store_msd[3:steps], 1))(np.unique(x_axis))
-#y intercept
-b = linebestfit[0]
- 
-#find average slope
-ms = 0
-for i in range(len(linebestfit)):
-	ms = ms + linebestfit[i]/x_axis[i]
-m = ms/len(linebestfit) 
-
-plt.plot(np.unique(x_axis), linebestfit, label= 'y = ' + str(m) + ' x + ' + str(b) )
 plt.legend()
-plt.xlabel('Simulation steps')
-plt.ylabel('Mean square displacement (pixels^2)')
-savefig('BestfitMSD')
+
+
+savefig('2Drandomwalkmsd.pdf')
+
+
+
+
+
