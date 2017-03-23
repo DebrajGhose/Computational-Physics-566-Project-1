@@ -62,13 +62,13 @@ for sims in range(1,simulations):
         walk_x[i] = walk_x[i-1] + dir_x
         walk_y[i] = walk_y[i-1] + dir_y
 
-        mdx = np.sqrt(walk_x[i]**2)
+        mdx = walk_x[i]
         msdx = walk_x[i]**2 #since the origin is [0,0], don't need to subtract intial time step
         
         
-        store_abs_x[i] = (store_abs_x[i]*(sims-1) + mdx) #weighted average
+        store_abs_x[i] = (store_abs_x[i]*(sims-1) + mdx)/sims #weighted average
 
-        store_abs_x2[i] = (store_abs_x2[i]*(sims-1) + msdx)
+        store_abs_x2[i] = (store_abs_x2[i]*(sims-1) + msdx)/sims
 
 
         msd = walk_x[i]**2 + walk_y[i]**2 #since the origin is [0,0], don't need to subtract intial time step
